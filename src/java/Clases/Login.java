@@ -2,25 +2,37 @@
 package Clases;
 
 public class Login {
-    private String nombre;
+    private int identificador;
+    private String tipousuario;
     private String correoelectronico;
     private String contrasena;
+    private String nombre;
 
     public Login() {
     }
 
-    public Login(String nombre, String correoelectronico, String contrasena) {
-        this.nombre = nombre;
+    public Login(int identificador, String tipousuario, String correoelectronico, String contrasena, String nombre) {
+        this.identificador = identificador;
+        this.tipousuario = tipousuario;
         this.correoelectronico = correoelectronico;
         this.contrasena = contrasena;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
+    }
+
+    public String getTipousuario() {
+        return tipousuario;
+    }
+
+    public void setTipousuario(String tipousuario) {
+        this.tipousuario = tipousuario;
     }
 
     public String getCorreoelectronico() {
@@ -39,14 +51,19 @@ public class Login {
         this.contrasena = contrasena;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public String toString() {
-        return "Login{" + "nombre=" + nombre + ", correoelectronico=" + correoelectronico + ", contrasena=" + contrasena + '}';
+        return "Login{" + "identificador=" + identificador + ", tipousuario=" + tipousuario + ", correoelectronico=" + correoelectronico + ", contrasena=" + contrasena + ", nombre=" + nombre + '}';
     }
 
     
 
-    
-    
-    
 }

@@ -48,6 +48,42 @@ public class ProductorProductoDAO {
         return centinela;
         }
     
+    //Listar todos los productos 
+    public List<ProductorProducto> listarProductos() throws SQLException{
+        List<ProductorProducto> lista = new ArrayList<>();
+        try {
+            //Abrir la conexion
+            this.conexion = new Conexion.Conexion().obtenerConexion();
+            //Crear la llamada al procedimiento Listar
+            String llamada = "{call PKG_PRODUCTORPRODUCTO.sp_listartodosproductoresproducto(?)}";
+            //Crear callablestatement
+            CallableStatement cstmt = this.conexion.prepareCall(llamada);
+            //Pasamos el cursor del procedimiento
+            cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            cstmt.execute(); //Se ejecuta el procedimiento
+            //Se usa el ResultSet para obtener la información del cursor (se castea)
+            ResultSet rs = (ResultSet) cstmt.getObject(1);
+            //Recorrer el rs y sacar los Admin
+            while (rs.next()){
+                ProductorProducto productorprod = new ProductorProducto();
+                productorprod.setPrecio(rs.getInt("precio"));
+                productorprod.setStock(rs.getInt("stock"));
+                productorprod.setCalibre_idcalibre(rs.getString("desccalibre"));
+                productorprod.setProducto_idproducto(rs.getString("nombreproducto"));
+                productorprod.setImg(rs.getString("img"));
+                productorprod.setProductor_rut(rs.getInt("productor_rut"));
+                productorprod.setNombre_productor(rs.getString("nombre"));
+                //Pasamos el objeto a la lista
+                lista.add(productorprod);     
+            }
+        } catch (Exception e) {
+            System.out.println("Error al listar"+e.getMessage());
+        } finally{
+            this.conexion.close();
+        }
+        return lista;     
+    }
+    
     //Listar Productos del productor por rut
     public ProductorProducto listarproductosporrutproductor(int rutabuscar) throws SQLException {
         ProductorProducto producpro = new ProductorProducto();

@@ -505,7 +505,7 @@ public class WebServiceFV {
         @WebParam(name = "productor_rut") int productor_rut,
         @WebParam(name = "img") String img){
          try{
-           ProductorProducto producpro = new ProductorProducto(precio, stock, calibre_idcalibre, producto_idproducto, productor_rut, img);
+           ProductorProducto producpro = new ProductorProducto(precio, stock, calibre_idcalibre, producto_idproducto, productor_rut, img, producto_idproducto);
             return daoproducpro.agregarNuevoProducto(producpro);         
         } catch (SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
@@ -523,14 +523,41 @@ public class WebServiceFV {
         }
         return null;
         } 
-      
-     @WebMethod(operationName = "eliminarProductoDelProductor")
+    @WebMethod(operationName = "listarProductos")
+    public List<ProductorProducto> listarProductos(){ 
+        try{
+            return daoproducpro.listarProductos();
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+        }
+    
+    
+    @WebMethod(operationName = "eliminarProductoDelProductor")
     public boolean eliminarProductoDelProductor(
         @WebParam(name = "rutproductor") int rutproductor,
         @WebParam(name = "idcalibre") String idcalibre,
         @WebParam(name = "idproducto") String idproducto){
         try{
             return daoproducpro.eliminarProductoDelProductor(rutproductor, idcalibre, idproducto);
+        } catch(SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return false;
+        }
+    
+    @WebMethod(operationName = "modificarProductosporRutProductor")
+    public boolean modificarProductosporRutProductor(
+        @WebParam(name = "rutabuscar") int rutabuscar,
+        @WebParam(name = "precio")int Precio,
+        @WebParam(name = "stock")int stock,
+        @WebParam(name = "calibre_idcalibre")String calibre_idcalibre,
+        @WebParam(name = "img")String img)
+        {
+        try{        
+            ProductorProducto productorProducto = new ProductorProducto(Precio, stock, calibre_idcalibre, calibre_idcalibre, Precio, img, calibre_idcalibre);
+            return daoproducpro.modificarProductosporRutProductor(rutabuscar,productorProducto);
         } catch(SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
         }
@@ -591,19 +618,33 @@ public class WebServiceFV {
         }
         return false;
         }
-    //LOGIN  
-    @WebMethod(operationName = "listarlogin")
-    public Login listarlogin(
+    //LOGIN 
+    //Login de cliente, transportista y productor
+    @WebMethod(operationName = "listarlogin1")
+    public Login listarlogin1(
         @WebParam(name = "correoelectronicoingreso") String correoelectronicoingreso,
         @WebParam(name = "contrasena") String contrasena)          
     {
         try{ 
-            return daologin.listarlogin(correoelectronicoingreso,contrasena);
+            return daologin.listarlogin1(correoelectronicoingreso,contrasena);
         } catch(SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
         }
         return null;
         }  
+    
+    @WebMethod(operationName = "listarlogin2")
+    public Login listarlogin2(
+        @WebParam(name = "correoelectronicoingreso") String correoelectronicoingreso,
+        @WebParam(name = "contrasena") String contrasena)          
+    {
+        try{ 
+            return daologin.listarlogin2(correoelectronicoingreso,contrasena);
+        } catch(SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+        }   
 }
           
             

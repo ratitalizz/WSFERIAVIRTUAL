@@ -1,6 +1,7 @@
 
 package DAO;
 
+import Clases.DetallePedido;
 import Clases.Productor;
 import java.sql.Connection;
 import java.sql.CallableStatement;
@@ -39,6 +40,16 @@ public class ProductorDAO {
             cstmt.setString(8,productor.getCorreoelectronico());
             cstmt.setString(9,productor.getContrasena());
             cstmt.setString(10,productor.getComuna_idcomuna());
+            
+//            //ciclo
+//            List<DetallePedido> lista = new ArrayList<>();
+//            DetallePedido d = new DetallePedido();
+//            d.setCantidad(cantidad);
+//            d.setIdproducto(id_producto);
+//            d.setProductor_rut(id_productor);
+//            lista.add(d);
+//            //aqui terminaria el ci
+//            cstmt.setObject(11, lista);
             //Ejecutar el procedimiento y comprobar si guardo algo
             if (cstmt.executeUpdate()>0){
                 centinela = true;
