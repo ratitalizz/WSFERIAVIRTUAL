@@ -34,7 +34,7 @@ public class LoginDAO {
         ResultSet rs = (ResultSet) cstmt.getObject(1);
         //Recorrer el rs y sacar los Consultores
         while (rs.next()){              
-                login.setIdentificador(rs.getInt("Identificador"));
+                login.setIdentificador(rs.getString("Identificador"));
                 login.setTipousuario(rs.getString("Tipousuario"));
             }
         } catch (Exception e) {

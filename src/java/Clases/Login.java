@@ -2,7 +2,7 @@
 package Clases;
 
 public class Login {
-    private int identificador;
+    private String identificador;
     private String tipousuario;
     private String correoelectronico;
     private String contrasena;
@@ -11,7 +11,7 @@ public class Login {
     public Login() {
     }
 
-    public Login(int identificador, String tipousuario, String correoelectronico, String contrasena, String nombre) {
+    public Login(String identificador, String tipousuario, String correoelectronico, String contrasena, String nombre) {
         this.identificador = identificador;
         this.tipousuario = tipousuario;
         this.correoelectronico = correoelectronico;
@@ -19,11 +19,11 @@ public class Login {
         this.nombre = nombre;
     }
 
-    public int getIdentificador() {
+    public String getIdentificador() {
         return identificador;
     }
 
-    public void setIdentificador(int identificador) {
+    public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
 
@@ -63,6 +63,8 @@ public class Login {
     public String toString() {
         return "Login{" + "identificador=" + identificador + ", tipousuario=" + tipousuario + ", correoelectronico=" + correoelectronico + ", contrasena=" + contrasena + ", nombre=" + nombre + '}';
     }
+
+    
 
     
 
