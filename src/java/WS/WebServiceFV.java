@@ -532,16 +532,18 @@ public class WebServiceFV {
         return false;
         }
      
+    
     @WebMethod(operationName = "listarproductosporrutproductor")
-    public ProductorProducto listarproductosporrutproductor(
-        @WebParam(name = "rutabuscar") int rutabuscar){
-        try{ 
+    public List<ProductorProducto> listarproductosporrutproductor(int rutabuscar){ 
+        try{
             return daoproducpro.listarproductosporrutproductor(rutabuscar);
-        } catch(SQLException ex){
+        } catch (SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
         }
         return null;
-        } 
+        }
+    
+    
     @WebMethod(operationName = "listarProductos")
     public List<ProductorProducto> listarProductos(){ 
         try{
@@ -601,12 +603,12 @@ public class WebServiceFV {
         return false;
         }
      
-     @WebMethod(operationName = "listarTransportexRut")
-    public Transporte listarTransportexRut(
-        @WebParam(name = "rutabuscar") int rutabuscar){
-        try{ 
+    
+    @WebMethod(operationName = "listarTransportexRut")
+    public List<Transporte> listarTransportexRut(int rutabuscar){ 
+        try{
             return daotransp.listarTransportexRut(rutabuscar);
-        } catch(SQLException ex){
+        } catch (SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
         }
         return null;

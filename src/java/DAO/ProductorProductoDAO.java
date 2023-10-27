@@ -85,37 +85,40 @@ public class ProductorProductoDAO {
     }
     
     //Listar Productos del productor por rut
-    public ProductorProducto listarproductosporrutproductor(int rutabuscar) throws SQLException {
-        ProductorProducto producpro = new ProductorProducto();
-    try {
-        //Abrir la conexion
-        this.conexion = new Conexion.Conexion().obtenerConexion();
-        //Crear la llamada al procedimiento Listar
-        String llamada = "{call PKG_PRODUCTORPRODUCTO.sp_listarproductosdelproductor(?,?)}";
-        //Crear callablestatement
-        CallableStatement cstmt = this.conexion.prepareCall(llamada);
-        //Pasamos el nombre de usuario como parámetro
-        cstmt.setInt(2, rutabuscar);
-        //Pasamos el cursor del procedimiento
-        cstmt.registerOutParameter(1, OracleTypes.CURSOR);
-        cstmt.execute(); //Se ejecuta el procedimiento
-        //Se usa el ResultSet para obtener la información del cursor (se castea)
-        ResultSet rs = (ResultSet) cstmt.getObject(1);
-        //Recorrer el rs y sacar los Consultores
-        while (rs.next()){
-                producpro.setPrecio(rs.getInt("precio"));
-                producpro.setStock(rs.getInt("stock"));
-                producpro.setCalibre_idcalibre(rs.getString("desccalibre"));
-                producpro.setProducto_idproducto(rs.getString("nombreproducto"));
-                producpro.setImg(rs.getString("img"));
+    public List<ProductorProducto> listarproductosporrutproductor(int rutabuscar) throws SQLException{
+        List<ProductorProducto> lista = new ArrayList<>();
+        try {
+            //Abrir la conexion
+            this.conexion = new Conexion.Conexion().obtenerConexion();
+            //Crear la llamada al procedimiento Listar
+            String llamada = "{call PKG_PRODUCTORPRODUCTO.sp_listarproductosdelproductor(?,?)}";
+            //Crear callablestatement
+            CallableStatement cstmt = this.conexion.prepareCall(llamada);
+            cstmt.setInt(2, rutabuscar);
+            //Pasamos el cursor del procedimiento
+            cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            cstmt.execute(); //Se ejecuta el procedimiento
+            //Se usa el ResultSet para obtener la información del cursor (se castea)
+            ResultSet rs = (ResultSet) cstmt.getObject(1);
+            //Recorrer el rs y sacar los Admin
+            while (rs.next()){
+                ProductorProducto productorprod = new ProductorProducto();
+                productorprod.setPrecio(rs.getInt("precio"));
+                productorprod.setStock(rs.getInt("stock"));
+                productorprod.setCalibre_idcalibre(rs.getString("desccalibre"));
+                productorprod.setProducto_idproducto(rs.getString("nombreproducto"));
+                productorprod.setImg(rs.getString("img"));
+                //Pasamos el objeto a la lista
+                lista.add(productorprod);     
             }
         } catch (Exception e) {
-            System.out.println("Error al listar Productos"+e.getMessage());
+            System.out.println("Error al listar"+e.getMessage());
         } finally{
             this.conexion.close();
         }
-        return producpro;
+        return lista;     
     }
+    
     
     //Actualizar producto   
    public boolean modificarProductosporRutProductor(int rutabuscar, ProductorProducto producpro) throws SQLException {

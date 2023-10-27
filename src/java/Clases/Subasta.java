@@ -75,7 +75,5 @@ public class Subasta {
     public String toString() {
         return "Subasta{" + "id_subasta=" + id_subasta + ", fechasubasta=" + fechasubasta + ", horainiciosubasta=" + horainiciosubasta + ", horaterminosubasta=" + horaterminosubasta + ", estadodelasubasta=" + estadodelasubasta + ", pedido_idpedido=" + pedido_idpedido + '}';
     }
-    
-    
-    
+          
 }

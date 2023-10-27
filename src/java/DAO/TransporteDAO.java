@@ -51,40 +51,43 @@ public class TransporteDAO {
         }    
         return centinela;   
     }
+
     
-     //Listar transporte x rut del transportista
-    public Transporte listarTransportexRut(int rutabuscar) throws SQLException {
-        Transporte transp = new Transporte();
-    try {
-        //Abrir la conexion
-        this.conexion = new Conexion.Conexion().obtenerConexion();
-        //Crear la llamada al procedimiento Listar
-        String llamada = "{call PKG_TRANSPORTE.sp_listartransportexrut(?,?)}";
-        //Crear callablestatement
-        CallableStatement cstmt = this.conexion.prepareCall(llamada);
-        //Pasamos el nombre de usuario como parámetro
-        cstmt.setInt(2, rutabuscar);
-        //Pasamos el cursor del procedimiento
-        cstmt.registerOutParameter(1, OracleTypes.CURSOR);
-        cstmt.execute(); //Se ejecuta el procedimiento
-        //Se usa el ResultSet para obtener la información del cursor (se castea)
-        ResultSet rs = (ResultSet) cstmt.getObject(1);
-        //Recorrer el rs y sacar los Consultoreslientes
-        while (rs.next()){
+         //Listar transporte x rut del transportista
+    public List<Transporte> listarTransportexRut(int rutabuscar) throws SQLException{
+        List<Transporte> lista = new ArrayList<>();
+        try {
+            //Abrir la conexion
+            this.conexion = new Conexion.Conexion().obtenerConexion();
+            //Crear la llamada al procedimiento Listar
+            String llamada = "{call PKG_TRANSPORTE.sp_listartransportexrut(?,?)}";
+            //Crear callablestatement
+            CallableStatement cstmt = this.conexion.prepareCall(llamada);
+            cstmt.setInt(2, rutabuscar);
+            //Pasamos el cursor del procedimiento
+            cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            cstmt.execute(); //Se ejecuta el procedimiento
+            //Se usa el ResultSet para obtener la información del cursor (se castea)
+            ResultSet rs = (ResultSet) cstmt.getObject(1);
+            //Recorrer el rs y sacar los Admin
+            while (rs.next()){
+                Transporte transp = new Transporte();
                 transp.setPatente(rs.getString("patente"));
                 transp.setCapacidadcarga(rs.getInt("capacidadcarga"));
                 transp.setFrigorificotrans(rs.getString("frigorificotrans"));
                 transp.setPermisocirculacion(rs.getString("permisocirculacion"));
                 transp.setModelo_idmodelo(rs.getString("descmodelo"));
                 transp.setModelo_idmodelo(rs.getString("descmarca"));
-        }    
+                //Pasamos el objeto a la lista
+                lista.add(transp);     
+            }
         } catch (Exception e) {
-            System.out.println("Error al listar Clientes"+e.getMessage());
+            System.out.println("Error al listar"+e.getMessage());
         } finally{
             this.conexion.close();
         }
-        return transp;
-        }
+        return lista;     
+    }
     
     //Modificar Transporte
     public boolean modificarTransporte(int rutabuscar, Transporte transp) throws SQLException {
