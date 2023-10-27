@@ -39,8 +39,7 @@ public class ProductorDAO {
             cstmt.setString(7,productor.getDireccion());
             cstmt.setString(8,productor.getCorreoelectronico());
             cstmt.setString(9,productor.getContrasena());
-            cstmt.setString(10,productor.getComuna_idcomuna());
-            
+            cstmt.setString(10,productor.getComuna_idcomuna());          
 //            //ciclo
 //            List<DetallePedido> lista = new ArrayList<>();
 //            DetallePedido d = new DetallePedido();

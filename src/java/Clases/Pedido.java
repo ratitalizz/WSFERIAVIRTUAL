@@ -5,12 +5,12 @@ package Clases;
 public class Pedido {
     private String idpedido;
     private String fechapedido;
-    private Integer totalpedido;
+    private int totalpedido;
     private float iva;
     private float comisionmaipogrande;
-    private Integer totaltransporte; 
-    private Integer totalfinal;
-    private Integer pesototalpedido;
+    private int totaltransporte; 
+    private int totalfinal;
+    private int pesototalpedido;
     private String estadopedido_idestado;
     private String bodegamp_idbodega;
     private String tiposeguro_idtiposeguro; 
@@ -19,7 +19,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(String idpedido, String fechapedido, Integer totalpedido, float iva, float comisionmaipogrande, Integer totaltransporte, Integer totalfinal, Integer pesototalpedido, String estadopedido_idestado, String bodegamp_idbodega, String tiposeguro_idtiposeguro, String cliente_id_cliente) {
+    public Pedido(String idpedido, String fechapedido, int totalpedido, float iva, float comisionmaipogrande, int totaltransporte, int totalfinal, int pesototalpedido, String estadopedido_idestado, String bodegamp_idbodega, String tiposeguro_idtiposeguro, String cliente_id_cliente) {
         this.idpedido = idpedido;
         this.fechapedido = fechapedido;
         this.totalpedido = totalpedido;
@@ -50,11 +50,11 @@ public class Pedido {
         this.fechapedido = fechapedido;
     }
 
-    public Integer getTotalpedido() {
+    public int getTotalpedido() {
         return totalpedido;
     }
 
-    public void setTotalpedido(Integer totalpedido) {
+    public void setTotalpedido(int totalpedido) {
         this.totalpedido = totalpedido;
     }
 
@@ -74,27 +74,27 @@ public class Pedido {
         this.comisionmaipogrande = comisionmaipogrande;
     }
 
-    public Integer getTotaltransporte() {
+    public int getTotaltransporte() {
         return totaltransporte;
     }
 
-    public void setTotaltransporte(Integer totaltransporte) {
+    public void setTotaltransporte(int totaltransporte) {
         this.totaltransporte = totaltransporte;
     }
 
-    public Integer getTotalfinal() {
+    public int getTotalfinal() {
         return totalfinal;
     }
 
-    public void setTotalfinal(Integer totalfinal) {
+    public void setTotalfinal(int totalfinal) {
         this.totalfinal = totalfinal;
     }
 
-    public Integer getPesototalpedido() {
+    public int getPesototalpedido() {
         return pesototalpedido;
     }
 
-    public void setPesototalpedido(Integer pesototalpedido) {
+    public void setPesototalpedido(int pesototalpedido) {
         this.pesototalpedido = pesototalpedido;
     }
 

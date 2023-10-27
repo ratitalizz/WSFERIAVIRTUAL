@@ -8,6 +8,12 @@ import Clases.Transportista;
 import Clases.ProductorProducto;
 import Clases.Transporte;
 import Clases.Login;
+import Clases.Pedido;
+import Clases.DetallePedido;
+import Clases.OfertarSubasta;
+import Clases.Calibre;
+import Clases.Producto;
+import Clases.Comuna;
 import DAO.AdministradorDAO;
 import DAO.ConsultorDAO;
 import DAO.ProductorDAO;
@@ -17,6 +23,12 @@ import DAO.TransportistaDAO;
 import DAO.ProductorProductoDAO;
 import DAO.TransporteDAO;
 import DAO.LoginDAO;
+import DAO.PedidoDAO;
+import DAO.DetallePedidoDAO;
+import DAO.OfertarSubastaDAO;
+import DAO.CalibreDAO;
+import DAO.ProductoDAO;
+import DAO.ComunaDAO;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,6 +50,13 @@ public class WebServiceFV {
     ProductorProductoDAO daoproducpro = new ProductorProductoDAO();
     TransporteDAO daotransp = new TransporteDAO();
     LoginDAO daologin = new LoginDAO();
+    PedidoDAO daopedido = new PedidoDAO();
+    DetallePedidoDAO daodetpedido = new DetallePedidoDAO();
+    OfertarSubastaDAO daoofersubasta = new OfertarSubastaDAO();
+    CalibreDAO daocalibre = new CalibreDAO();
+    ProductoDAO daoproducto = new ProductoDAO();
+    ComunaDAO daocomuna = new ComunaDAO();
+            
     
     //ADMINISTRADOR
     @WebMethod(operationName = "agregarAdministrador")
@@ -645,6 +664,89 @@ public class WebServiceFV {
         }
         return null;
         }   
+    
+    //PEDIDO
+    @WebMethod(operationName = "crearNuevoPedido")
+     public Boolean crearNuevoPedido(
+        @WebParam(name = "cliente_id_cliente") String Cliente_id_cliente){
+        try{
+            Pedido pedido = new Pedido(Cliente_id_cliente, Cliente_id_cliente, 0, 0, 0, 0, 0, 0, Cliente_id_cliente, Cliente_id_cliente, Cliente_id_cliente, Cliente_id_cliente);
+            return daopedido.crearNuevoPedido(pedido);         
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return false;
+        } 
+     
+    //DETALLE DEL PEDIDO
+    @WebMethod(operationName = "crearNuevoDetallePedidoo")
+     public Boolean crearNuevoDetallePedido(
+        @WebParam(name = "cantidad") int Cantidad,
+        @WebParam(name = "idproducto") String Idproducto,
+        @WebParam(name = "productor_rut") int Productor_rut,
+        @WebParam(name = "pedido_idpedido") String Pedido_idpedido,
+        @WebParam(name = "calibre_idcalibre") String Calibre_idcalibre){
+        try{
+            DetallePedido detpedido = new DetallePedido(Cantidad, Idproducto, Productor_rut, Pedido_idpedido, Calibre_idcalibre);
+            return daodetpedido.crearNuevoDetallePedido(detpedido);         
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return false;
+        } 
+    
+     
+    //OFERTAR SUBASTA
+    @WebMethod(operationName = "crearNuevaOfertaEnSubasta")
+     public Boolean crearNuevaOfertaEnSubasta(
+        @WebParam(name = "montosubasta") int Montosubasta,
+        @WebParam(name = "subasta_id_subasta") String Subasta_id_subasta,
+        @WebParam(name = "transportista_rut") int Transportista_rut,
+        @WebParam(name = "pedido_idpedido") String Pedido_idpedido){
+        try{
+            OfertarSubasta ofersubasta = new OfertarSubasta(Montosubasta, Subasta_id_subasta, Transportista_rut, Pedido_idpedido);
+            return daoofersubasta.crearNuevaOfertaEnSubasta(ofersubasta);         
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return false;
+        } 
+     
+    //LISTAS VARIAS
+     //LISTAR CALIBRE
+    @WebMethod(operationName = "listarCalibre")
+    public List<Calibre> listarCalibre(){ 
+        try{
+            return daocalibre.listarCalibre();
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+    }
+    
+    //LISTAR PRODUCTOS POR NOMBRE E ID
+    @WebMethod(operationName = "listarProductosxIdyNombre")
+    public List<Producto> listarProductosxIdyNombre(){ 
+        try{
+            return daoproducto.listarProductosxIdyNombre();
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+    }
+    
+    //LISTAR COMUNAS POR NOMBRE E ID
+    @WebMethod(operationName = "listarComunaxIdyNombre")
+    public List<Comuna> listarComunaxIdyNombre(){ 
+        try{
+            return daocomuna.listarComunaxIdyNombre();
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+    }
+    
+    
 }
           
             

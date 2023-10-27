@@ -3,26 +3,28 @@ package Clases;
 
 
 public class DetallePedido {
-    private Integer cantidad;
+    private int cantidad;
     private String idproducto;
-    private Integer productor_rut;
+    private int productor_rut;
     private String pedido_idpedido;
+    private String calibre_idcalibre;
 
     public DetallePedido() {
-    }
+    }  
 
-    public DetallePedido(Integer cantidad, String idproducto, Integer productor_rut, String pedido_idpedido) {
+    public DetallePedido(int cantidad, String idproducto, int productor_rut, String pedido_idpedido, String calibre_idcalibre) {
         this.cantidad = cantidad;
         this.idproducto = idproducto;
         this.productor_rut = productor_rut;
         this.pedido_idpedido = pedido_idpedido;
+        this.calibre_idcalibre = calibre_idcalibre;
     }
 
-    public Integer getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -34,11 +36,11 @@ public class DetallePedido {
         this.idproducto = idproducto;
     }
 
-    public Integer getProductor_rut() {
+    public int getProductor_rut() {
         return productor_rut;
     }
 
-    public void setProductor_rut(Integer productor_rut) {
+    public void setProductor_rut(int productor_rut) {
         this.productor_rut = productor_rut;
     }
 
@@ -50,12 +52,18 @@ public class DetallePedido {
         this.pedido_idpedido = pedido_idpedido;
     }
 
+    public String getCalibre_idcalibre() {
+        return calibre_idcalibre;
+    }
+
+    public void setCalibre_idcalibre(String calibre_idcalibre) {
+        this.calibre_idcalibre = calibre_idcalibre;
+    }
+
     @Override
     public String toString() {
-        return "DetallePedido{" + "cantidad=" + cantidad + ", idproducto=" + idproducto + ", productor_rut=" + productor_rut + ", pedido_idpedido=" + pedido_idpedido + '}';
+        return "DetallePedido{" + "cantidad=" + cantidad + ", idproducto=" + idproducto + ", productor_rut=" + productor_rut + ", pedido_idpedido=" + pedido_idpedido + ", calibre_idcalibre=" + calibre_idcalibre + '}';
     }
-    
-    
     
     
 }
