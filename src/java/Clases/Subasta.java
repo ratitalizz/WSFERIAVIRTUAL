@@ -4,76 +4,98 @@ package Clases;
 
 public class Subasta {
     
-    private String id_subasta; 
-    private String fechasubasta;
-    private String horainiciosubasta;
-    private String horaterminosubasta;
-    private String estadodelasubasta;
-    private String pedido_idpedido;
+    private String idSubasta;
+    private String idPedido;
+    private int cantidadTotal;
+    private int totalTransporte;
+    private String fechaSubasta;
+    private String horarioTermino;
+    private String direccionOrigen;
+    private String direccionDestino;
 
     public Subasta() {
     }
-    
-    public Subasta(String id_subasta, String fechasubasta, String horainiciosubasta, String horaterminosubasta, String estadodelasubasta, String pedido_idpedido) {
-        this.id_subasta = id_subasta;
-        this.fechasubasta = fechasubasta;
-        this.horainiciosubasta = horainiciosubasta;
-        this.horaterminosubasta = horaterminosubasta;
-        this.estadodelasubasta = estadodelasubasta;
-        this.pedido_idpedido = pedido_idpedido;
+
+    public Subasta(String idSubasta, String idPedido, int cantidadTotal, int totalTransporte, String fechaSubasta, String horarioTermino, String direccionOrigen, String direccionDestino) {
+        this.idSubasta = idSubasta;
+        this.idPedido = idPedido;
+        this.cantidadTotal = cantidadTotal;
+        this.totalTransporte = totalTransporte;
+        this.fechaSubasta = fechaSubasta;
+        this.horarioTermino = horarioTermino;
+        this.direccionOrigen = direccionOrigen;
+        this.direccionDestino = direccionDestino;
     }
 
-    public String getId_subasta() {
-        return id_subasta;
+    public String getIdSubasta() {
+        return idSubasta;
     }
 
-    public void setId_subasta(String id_subasta) {
-        this.id_subasta = id_subasta;
+    public void setIdSubasta(String idSubasta) {
+        this.idSubasta = idSubasta;
     }
 
-    public String getFechasubasta() {
-        return fechasubasta;
+    public String getIdPedido() {
+        return idPedido;
     }
 
-    public void setFechasubasta(String fechasubasta) {
-        this.fechasubasta = fechasubasta;
+    public void setIdPedido(String idPedido) {
+        this.idPedido = idPedido;
     }
 
-    public String getHorainiciosubasta() {
-        return horainiciosubasta;
+    public int getCantidadTotal() {
+        return cantidadTotal;
     }
 
-    public void setHorainiciosubasta(String horainiciosubasta) {
-        this.horainiciosubasta = horainiciosubasta;
+    public void setCantidadTotal(int cantidadTotal) {
+        this.cantidadTotal = cantidadTotal;
     }
 
-    public String getHoraterminosubasta() {
-        return horaterminosubasta;
+    public int getTotalTransporte() {
+        return totalTransporte;
     }
 
-    public void setHoraterminosubasta(String horaterminosubasta) {
-        this.horaterminosubasta = horaterminosubasta;
+    public void setTotalTransporte(int totalTransporte) {
+        this.totalTransporte = totalTransporte;
     }
 
-    public String getEstadodelasubasta() {
-        return estadodelasubasta;
+    public String getFechaSubasta() {
+        return fechaSubasta;
     }
 
-    public void setEstadodelasubasta(String estadodelasubasta) {
-        this.estadodelasubasta = estadodelasubasta;
+    public void setFechaSubasta(String fechaSubasta) {
+        this.fechaSubasta = fechaSubasta;
     }
 
-    public String getPedido_idpedido() {
-        return pedido_idpedido;
+    public String getHorarioTermino() {
+        return horarioTermino;
     }
 
-    public void setPedido_idpedido(String pedido_idpedido) {
-        this.pedido_idpedido = pedido_idpedido;
+    public void setHorarioTermino(String horarioTermino) {
+        this.horarioTermino = horarioTermino;
+    }
+
+    public String getDireccionOrigen() {
+        return direccionOrigen;
+    }
+
+    public void setDireccionOrigen(String direccionOrigen) {
+        this.direccionOrigen = direccionOrigen;
+    }
+
+    public String getDireccionDestino() {
+        return direccionDestino;
+    }
+
+    public void setDireccionDestino(String direccionDestino) {
+        this.direccionDestino = direccionDestino;
     }
 
     @Override
     public String toString() {
-        return "Subasta{" + "id_subasta=" + id_subasta + ", fechasubasta=" + fechasubasta + ", horainiciosubasta=" + horainiciosubasta + ", horaterminosubasta=" + horaterminosubasta + ", estadodelasubasta=" + estadodelasubasta + ", pedido_idpedido=" + pedido_idpedido + '}';
+        return "Subasta{" + "idSubasta=" + idSubasta + ", idPedido=" + idPedido + ", cantidadTotal=" + cantidadTotal + ", totalTransporte=" + totalTransporte + ", fechaSubasta=" + fechaSubasta + ", horarioTermino=" + horarioTermino + ", direccionOrigen=" + direccionOrigen + ", direccionDestino=" + direccionDestino + '}';
     }
+    
+   
           
 }

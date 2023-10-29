@@ -13,7 +13,14 @@ import Clases.DetallePedido;
 import Clases.OfertarSubasta;
 import Clases.Calibre;
 import Clases.Producto;
+import Clases.Pais;
+import Clases.Region;
 import Clases.Comuna;
+import Clases.Subasta;
+import Clases.Marca;
+import Clases.Modelo;
+import Clases.ContratoClienteExterno;
+import Clases.ContratoTransporte;
 import DAO.AdministradorDAO;
 import DAO.ConsultorDAO;
 import DAO.ProductorDAO;
@@ -28,7 +35,14 @@ import DAO.DetallePedidoDAO;
 import DAO.OfertarSubastaDAO;
 import DAO.CalibreDAO;
 import DAO.ProductoDAO;
+import DAO.PaisDAO;
+import DAO.RegionDAO;
 import DAO.ComunaDAO;
+import DAO.SubastaDAO;
+import DAO.MarcaDAO;
+import DAO.ModeloDAO;
+import DAO.ContratoClienteExternoDAO;
+import DAO.ContratoTransporteDAO;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -56,7 +70,13 @@ public class WebServiceFV {
     CalibreDAO daocalibre = new CalibreDAO();
     ProductoDAO daoproducto = new ProductoDAO();
     ComunaDAO daocomuna = new ComunaDAO();
-            
+    PaisDAO daopais = new PaisDAO();
+    RegionDAO daoregion = new RegionDAO();
+    SubastaDAO daosubasta = new SubastaDAO();
+    MarcaDAO daomarca = new MarcaDAO();
+    ModeloDAO daomodelo = new ModeloDAO();
+    ContratoClienteExternoDAO daocontratocliex = new ContratoClienteExternoDAO();
+    ContratoTransporteDAO daocontratotran = new ContratoTransporteDAO();
     
     //ADMINISTRADOR
     @WebMethod(operationName = "agregarAdministrador")
@@ -524,7 +544,7 @@ public class WebServiceFV {
         @WebParam(name = "productor_rut") int productor_rut,
         @WebParam(name = "img") String img){
          try{
-           ProductorProducto producpro = new ProductorProducto(precio, stock, calibre_idcalibre, producto_idproducto, productor_rut, img, producto_idproducto);
+           ProductorProducto producpro = new ProductorProducto(precio, stock, calibre_idcalibre, producto_idproducto, productor_rut, img, producto_idproducto, producto_idproducto, img);
             return daoproducpro.agregarNuevoProducto(producpro);         
         } catch (SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
@@ -577,7 +597,7 @@ public class WebServiceFV {
         @WebParam(name = "img")String img)
         {
         try{        
-            ProductorProducto productorProducto = new ProductorProducto(Precio, stock, calibre_idcalibre, calibre_idcalibre, Precio, img, calibre_idcalibre);
+            ProductorProducto productorProducto = new ProductorProducto(Precio, stock, calibre_idcalibre, calibre_idcalibre, Precio, img, calibre_idcalibre, img, img);
             return daoproducpro.modificarProductosporRutProductor(rutabuscar,productorProducto);
         } catch(SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
@@ -669,7 +689,7 @@ public class WebServiceFV {
     
     //PEDIDO
     @WebMethod(operationName = "crearNuevoPedido")
-     public Boolean crearNuevoPedido(
+     public String crearNuevoPedido(
         @WebParam(name = "cliente_id_cliente") String Cliente_id_cliente){
         try{
             Pedido pedido = new Pedido(Cliente_id_cliente, Cliente_id_cliente, 0, 0, 0, 0, 0, 0, Cliente_id_cliente, Cliente_id_cliente, Cliente_id_cliente, Cliente_id_cliente);
@@ -677,7 +697,7 @@ public class WebServiceFV {
         } catch (SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
         }
-        return false;
+        return null;
         } 
      
     //DETALLE DEL PEDIDO
@@ -737,18 +757,93 @@ public class WebServiceFV {
         return null;
     }
     
-    //LISTAR COMUNAS POR NOMBRE E ID
-    @WebMethod(operationName = "listarComunaxIdyNombre")
-    public List<Comuna> listarComunaxIdyNombre(){ 
+    //LISTAR PAISES (CHILE Y EXTRANJERO)
+    @WebMethod(operationName = "listarPais")
+    public List<Pais> listarPais(){ 
         try{
-            return daocomuna.listarComunaxIdyNombre();
+            return daopais.listarPais();
         } catch (SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
         }
         return null;
     }
     
+    //LISTAR REGIONES POR ID DE PAIS
+    @WebMethod(operationName = "listarRegionesPorIDPais")
+    public List<Region> listarRegionesPorIDPais(String idpais){ 
+        try{
+            return daoregion.listarRegionesPorIDPais(idpais);
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+        }
     
+    //LISTAR COMUNAS POR NOMBRE E ID
+    @WebMethod(operationName = "listarComuna")
+    public List<Comuna> listarComuna(String idregion){ 
+        try{
+            return daocomuna.listarComuna(idregion);
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+    }
+    
+    //LISTAR SUBASTAS 
+    @WebMethod(operationName = "listarSubastas")
+    public List<Subasta> listarSubastas(){ 
+        try{
+            return daosubasta.listarSubastas();
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+    }
+    
+    //LISTAR MARCAS 
+    @WebMethod(operationName = "listarMarcas")
+    public List<Marca> listarMarcas(){ 
+        try{
+            return daomarca.listarMarcas();
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+    }
+    
+    //LISTAR MODELOS
+    @WebMethod(operationName = "listarModelos")
+    public List<Modelo> listarModelos(String idmarca){ 
+        try{
+            return daomodelo.listarModelos(idmarca);
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+    }
+    
+    //LISTAR CONTRATOS DE CLIENTES EXTERNOS
+    @WebMethod(operationName = "listarContratosCliEx")
+    public List<ContratoClienteExterno> listarContratosCliEx(){ 
+        try{
+            return daocontratocliex.listarContratosCliEx();
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+    }
+    
+    //LISTAR CONTRATOS DE TRANSPORTES
+    @WebMethod(operationName = "listarContratosTransporte")
+    public List<ContratoTransporte> listarContratosTransporte(){ 
+        try{
+            return daocontratotran.listarContratosTransporte();
+        } catch (SQLException ex){
+            Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        return null;
+    }
 }
           
             

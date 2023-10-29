@@ -69,10 +69,12 @@ public class ProductorProductoDAO {
                 productorprod.setPrecio(rs.getInt("precio"));
                 productorprod.setStock(rs.getInt("stock"));
                 productorprod.setCalibre_idcalibre(rs.getString("desccalibre"));
-                productorprod.setProducto_idproducto(rs.getString("nombreproducto"));
+                productorprod.setNombreproducto(rs.getString("nombreproducto"));
                 productorprod.setImg(rs.getString("img"));
                 productorprod.setProductor_rut(rs.getInt("productor_rut"));
                 productorprod.setNombre_productor(rs.getString("nombre"));
+                productorprod.setProducto_idproducto(rs.getString("producto_idproducto"));
+                productorprod.setIdcalibre(rs.getString("idcalibre"));
                 //Pasamos el objeto a la lista
                 lista.add(productorprod);     
             }

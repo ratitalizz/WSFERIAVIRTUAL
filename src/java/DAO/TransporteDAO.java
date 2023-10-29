@@ -53,7 +53,7 @@ public class TransporteDAO {
     }
 
     
-         //Listar transporte x rut del transportista
+    //Listar transporte x rut del transportista
     public List<Transporte> listarTransportexRut(int rutabuscar) throws SQLException{
         List<Transporte> lista = new ArrayList<>();
         try {

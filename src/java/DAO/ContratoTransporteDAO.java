@@ -1,7 +1,6 @@
-
 package DAO;
 
-import Clases.Comuna;
+import Clases.ContratoTransporte;
 import java.sql.Connection;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -12,41 +11,40 @@ import java.util.Set;
 import oracle.jdbc.OracleTypes;
 import java.sql.ResultSet;
 
-public class ComunaDAO {
+public class ContratoTransporteDAO {
     private Connection conexion;
 
-    public ComunaDAO() {
+    public ContratoTransporteDAO() {
     }
     
-    //LISTAR COMUNAS POR ID REGION
-    public List<Comuna> listarComuna(String idregion) throws SQLException{
-        List<Comuna> lista = new ArrayList<>();
+    //LISTAR CONTRATOS DE TRANSPORTES
+    public List<ContratoTransporte> listarContratosTransporte() throws SQLException {
+        List<ContratoTransporte> lista = new ArrayList<>();
         try {
             //Abrir la conexion
             this.conexion = new Conexion.Conexion().obtenerConexion();
             //Crear la llamada al procedimiento Listar
-            String llamada = "{call sp_listarComuna(?,?)}";
+            String llamada = "{call sp_listarcontratoTransporte(?)}";
             //Crear callablestatement
             CallableStatement cstmt = this.conexion.prepareCall(llamada);
-            cstmt.setString(2, idregion);
             //Pasamos el cursor del procedimiento
             cstmt.registerOutParameter(1, OracleTypes.CURSOR);
             cstmt.execute(); //Se ejecuta el procedimiento
             //Se usa el ResultSet para obtener la información del cursor (se castea)
             ResultSet rs = (ResultSet) cstmt.getObject(1);
-            //Recorrer el rs y sacar los Admin
-            while (rs.next()){
-                Comuna comuna = new Comuna();
-                comuna.setIdcomuna(rs.getString("idcomuna"));
-                comuna.setNombrecomuna(rs.getString("nombrecomuna"));
-                //Pasamos el objeto a la lista
-                lista.add(comuna); 
+            while (rs.next()) {
+                ContratoTransporte contrato = new ContratoTransporte();
+                contrato.setId_contrato(rs.getString("id_contrato"));
+                contrato.setFechacontrato(rs.getString("fechacontrato")); 
+                contrato.setIdordent("idordent");
+                lista.add(contrato);
             }
-             } catch (Exception e) {
+            // Cerrar la conexión y liberar los recursos
+        } catch (Exception e) {
             System.out.println("Error al listar "+e.getMessage());
         } finally{
             this.conexion.close();
         }
         return lista;
-        }
+    }   
 }

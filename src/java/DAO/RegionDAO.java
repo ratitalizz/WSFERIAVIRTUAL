@@ -1,7 +1,7 @@
 
 package DAO;
 
-import Clases.Comuna;
+import Clases.Region;
 import java.sql.Connection;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -12,23 +12,23 @@ import java.util.Set;
 import oracle.jdbc.OracleTypes;
 import java.sql.ResultSet;
 
-public class ComunaDAO {
+public class RegionDAO {
     private Connection conexion;
 
-    public ComunaDAO() {
+    public RegionDAO() {
     }
     
-    //LISTAR COMUNAS POR ID REGION
-    public List<Comuna> listarComuna(String idregion) throws SQLException{
-        List<Comuna> lista = new ArrayList<>();
+    //Listar transporte x rut del transportista
+    public List<Region> listarRegionesPorIDPais(String idpais) throws SQLException{
+        List<Region> lista = new ArrayList<>();
         try {
             //Abrir la conexion
             this.conexion = new Conexion.Conexion().obtenerConexion();
             //Crear la llamada al procedimiento Listar
-            String llamada = "{call sp_listarComuna(?,?)}";
+            String llamada = "{call sp_listarRegion(?,?)}";
             //Crear callablestatement
             CallableStatement cstmt = this.conexion.prepareCall(llamada);
-            cstmt.setString(2, idregion);
+            cstmt.setString(2, idpais);
             //Pasamos el cursor del procedimiento
             cstmt.registerOutParameter(1, OracleTypes.CURSOR);
             cstmt.execute(); //Se ejecuta el procedimiento
@@ -36,17 +36,17 @@ public class ComunaDAO {
             ResultSet rs = (ResultSet) cstmt.getObject(1);
             //Recorrer el rs y sacar los Admin
             while (rs.next()){
-                Comuna comuna = new Comuna();
-                comuna.setIdcomuna(rs.getString("idcomuna"));
-                comuna.setNombrecomuna(rs.getString("nombrecomuna"));
+                Region region = new Region();
+                region.setIdregion(rs.getString("idregion"));
+                region.setNombreregion(rs.getString("nombreregion"));
                 //Pasamos el objeto a la lista
-                lista.add(comuna); 
+                lista.add(region);     
             }
-             } catch (Exception e) {
-            System.out.println("Error al listar "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error al listar"+e.getMessage());
         } finally{
             this.conexion.close();
         }
-        return lista;
-        }
+        return lista;     
+    }
 }

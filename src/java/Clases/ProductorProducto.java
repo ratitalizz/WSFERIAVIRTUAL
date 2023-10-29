@@ -10,11 +10,13 @@ public class ProductorProducto {
     private int productor_rut;
     private String img;
     private String nombre_productor;
+    private String nombreproducto;
+    private String idcalibre;
 
     public ProductorProducto() {
     }
 
-    public ProductorProducto(int precio, int stock, String calibre_idcalibre, String producto_idproducto, int productor_rut, String img, String nombre_productor) {
+    public ProductorProducto(int precio, int stock, String calibre_idcalibre, String producto_idproducto, int productor_rut, String img, String nombre_productor, String nombreproducto, String idcalibre) {
         this.precio = precio;
         this.stock = stock;
         this.calibre_idcalibre = calibre_idcalibre;
@@ -22,6 +24,8 @@ public class ProductorProducto {
         this.productor_rut = productor_rut;
         this.img = img;
         this.nombre_productor = nombre_productor;
+        this.nombreproducto = nombreproducto;
+        this.idcalibre = idcalibre;
     }
 
     public int getPrecio() {
@@ -80,12 +84,27 @@ public class ProductorProducto {
         this.nombre_productor = nombre_productor;
     }
 
-    @Override
-    public String toString() {
-        return "ProductorProducto{" + "precio=" + precio + ", stock=" + stock + ", calibre_idcalibre=" + calibre_idcalibre + ", producto_idproducto=" + producto_idproducto + ", productor_rut=" + productor_rut + ", img=" + img + ", nombre_productor=" + nombre_productor + '}';
+    public String getNombreproducto() {
+        return nombreproducto;
     }
 
-   
+    public void setNombreproducto(String nombreproducto) {
+        this.nombreproducto = nombreproducto;
+    }
+
+    public String getIdcalibre() {
+        return idcalibre;
+    }
+
+    public void setIdcalibre(String idcalibre) {
+        this.idcalibre = idcalibre;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductorProducto{" + "precio=" + precio + ", stock=" + stock + ", calibre_idcalibre=" + calibre_idcalibre + ", producto_idproducto=" + producto_idproducto + ", productor_rut=" + productor_rut + ", img=" + img + ", nombre_productor=" + nombre_productor + ", nombreproducto=" + nombreproducto + ", idcalibre=" + idcalibre + '}';
+    }
+
     
     
 }
