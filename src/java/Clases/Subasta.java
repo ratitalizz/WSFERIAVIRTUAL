@@ -11,12 +11,14 @@ public class Subasta {
     private String fechaSubasta;
     private String horarioTermino;
     private String direccionOrigen;
+    private String comunaOrigen;
     private String direccionDestino;
+    private String comunaDestino;
 
     public Subasta() {
     }
 
-    public Subasta(String idSubasta, String idPedido, int cantidadTotal, int totalTransporte, String fechaSubasta, String horarioTermino, String direccionOrigen, String direccionDestino) {
+    public Subasta(String idSubasta, String idPedido, int cantidadTotal, int totalTransporte, String fechaSubasta, String horarioTermino, String direccionOrigen, String comunaOrigen, String direccionDestino, String comunaDestino) {
         this.idSubasta = idSubasta;
         this.idPedido = idPedido;
         this.cantidadTotal = cantidadTotal;
@@ -24,7 +26,9 @@ public class Subasta {
         this.fechaSubasta = fechaSubasta;
         this.horarioTermino = horarioTermino;
         this.direccionOrigen = direccionOrigen;
+        this.comunaOrigen = comunaOrigen;
         this.direccionDestino = direccionDestino;
+        this.comunaDestino = comunaDestino;
     }
 
     public String getIdSubasta() {
@@ -83,6 +87,14 @@ public class Subasta {
         this.direccionOrigen = direccionOrigen;
     }
 
+    public String getComunaOrigen() {
+        return comunaOrigen;
+    }
+
+    public void setComunaOrigen(String comunaOrigen) {
+        this.comunaOrigen = comunaOrigen;
+    }
+
     public String getDireccionDestino() {
         return direccionDestino;
     }
@@ -91,11 +103,18 @@ public class Subasta {
         this.direccionDestino = direccionDestino;
     }
 
+    public String getComunaDestino() {
+        return comunaDestino;
+    }
+
+    public void setComunaDestino(String comunaDestino) {
+        this.comunaDestino = comunaDestino;
+    }
+
     @Override
     public String toString() {
-        return "Subasta{" + "idSubasta=" + idSubasta + ", idPedido=" + idPedido + ", cantidadTotal=" + cantidadTotal + ", totalTransporte=" + totalTransporte + ", fechaSubasta=" + fechaSubasta + ", horarioTermino=" + horarioTermino + ", direccionOrigen=" + direccionOrigen + ", direccionDestino=" + direccionDestino + '}';
+        return "Subasta{" + "idSubasta=" + idSubasta + ", idPedido=" + idPedido + ", cantidadTotal=" + cantidadTotal + ", totalTransporte=" + totalTransporte + ", fechaSubasta=" + fechaSubasta + ", horarioTermino=" + horarioTermino + ", direccionOrigen=" + direccionOrigen + ", comunaOrigen=" + comunaOrigen + ", direccionDestino=" + direccionDestino + ", comunaDestino=" + comunaDestino + '}';
     }
-    
-   
+
           
 }

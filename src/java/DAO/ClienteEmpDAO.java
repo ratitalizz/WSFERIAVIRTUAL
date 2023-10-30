@@ -29,7 +29,7 @@ public class ClienteEmpDAO {
             //El primer conexion despues del new va al package y el segundo a la clase conexion
             this.conexion = new Conexion.Conexion().obtenerConexion();
             //Crear la llamada al procedimiento Agregar o Crear
-            String llamada = "{ call sp_clienteemp(?,?,?,?,?,?)}";
+            String llamada = "{ call PKG_CLIENTE.sp_clienteemp(?,?,?,?,?,?)}";
             //Crear el callablestatement para poder ejecutar el procedimiento
             CallableStatement cstmt = this.conexion.prepareCall(llamada);
             //Pasar los datos del admin al procedimiento
@@ -81,13 +81,14 @@ public class ClienteEmpDAO {
         }
    
     //Eliminar Cliente Empresa
-    public boolean eliminarDefinitivoClienteEmpresa(String identificadoraeliminar) throws SQLException {
+    public boolean eliminarDefinitivoClienteEmpresa(String identificadoraeliminar, String id_cliente) throws SQLException {
         boolean centinela = false;
         try {
             this.conexion = new Conexion.Conexion().obtenerConexion();
-            String llamada = "{call PKG_CLIENTE.sp_eliminarclienteforadminxemp(?)}";
+            String llamada = "{call PKG_CLIENTE.sp_eliminarclienteforadminxemp(?,?)}";
             CallableStatement cstmt = this.conexion.prepareCall(llamada);
             cstmt.setString(1, identificadoraeliminar); 
+            cstmt.setString(2, id_cliente);
             //Ejecutamos y se revisa si funciona el eliminar
             if(cstmt.executeUpdate()>0){
                 centinela = true;

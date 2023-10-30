@@ -415,9 +415,10 @@ public class WebServiceFV {
     
     @WebMethod(operationName = "eliminarDefinitivoClienteEmpresa")
     public boolean eliminarDefinitivoClienteEmpresa(
-        @WebParam(name = "rutaeliminar") String identificadoraeliminar){
+        @WebParam(name = "rutaeliminar") String identificadoraeliminar,
+        @WebParam(name = "id_cliente") String id_cliente){
         try{
-            return daocliemp.eliminarDefinitivoClienteEmpresa(identificadoraeliminar);        
+            return daocliemp.eliminarDefinitivoClienteEmpresa(identificadoraeliminar, id_cliente);        
         } catch(SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
         }

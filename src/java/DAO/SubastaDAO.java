@@ -41,7 +41,9 @@ public class SubastaDAO {
                 subasta.setFechaSubasta(rs.getString("FECHASUBASTA"));
                 subasta.setHorarioTermino(rs.getString("HORARIO_TERMINO"));
                 subasta.setDireccionOrigen(rs.getString("DIRECCION_ORIGEN"));
+                subasta.setComunaOrigen(rs.getString("COMUNA_ORIGEN"));
                 subasta.setDireccionDestino(rs.getString("DIRECCION_DESTINO"));
+                subasta.setComunaDestino(rs.getString("COMUNA_DESTINO"));
                 lista.add(subasta);
             }
 
