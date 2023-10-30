@@ -46,7 +46,7 @@ public class LoginDAO {
     }
     
     //login para administrador y consultor
-    public Login listarlogin2(String correoelectronicoingreso, String contrasenaingreso) throws SQLException {
+    public Login listarlogin2(String nombre, String contrasenaingreso) throws SQLException {
         Login login = new Login();
     try {
         //Abrir la conexion
@@ -56,7 +56,7 @@ public class LoginDAO {
         //Crear callablestatement
         CallableStatement cstmt = this.conexion.prepareCall(llamada);
         //Pasamos el nombre de usuario como parámetro
-        cstmt.setString(2, correoelectronicoingreso);
+        cstmt.setString(2, nombre);
         cstmt.setString(3, contrasenaingreso);
         //Pasamos el cursor del procedimiento
         cstmt.registerOutParameter(1, OracleTypes.CURSOR);
@@ -65,7 +65,8 @@ public class LoginDAO {
         ResultSet rs = (ResultSet) cstmt.getObject(1);
         //Recorrer el rs y sacar los Consultores
         while (rs.next()){              
-                login.setNombre(rs.getString("nombreusuario"));
+                login.setNombre(rs.getString("Identificador"));
+                login.setTipousuario(rs.getString("Tipousuario"));
             }
         } catch (Exception e) {
             System.out.println("Error al listar"+e.getMessage());

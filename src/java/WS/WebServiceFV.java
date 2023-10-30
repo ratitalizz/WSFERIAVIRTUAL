@@ -677,11 +677,11 @@ public class WebServiceFV {
     
     @WebMethod(operationName = "listarlogin2")
     public Login listarlogin2(
-        @WebParam(name = "correoelectronicoingreso") String correoelectronicoingreso,
+        @WebParam(name = "nombreusuario") String nombre,
         @WebParam(name = "contrasena") String contrasena)          
     {
         try{ 
-            return daologin.listarlogin2(correoelectronicoingreso,contrasena);
+            return daologin.listarlogin2(nombre,contrasena);
         } catch(SQLException ex){
             Logger.getLogger(WebServiceFV.class.getName()).log(Level.SEVERE, null,ex);
         }

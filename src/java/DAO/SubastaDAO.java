@@ -36,6 +36,8 @@ public class SubastaDAO {
                 Subasta subasta = new Subasta();
                 subasta.setIdSubasta(rs.getString("ID_SUBASTA"));
                 subasta.setIdPedido(rs.getString("PEDIDO_IDPEDIDO"));
+                subasta.setNombreCliente(rs.getString("NOMBRE_CLIENTE"));
+                subasta.setNombreClienteEmp(rs.getString("NOMBRE_EMP"));
                 subasta.setCantidadTotal(rs.getInt("CANTIDAD_TOTAL"));
                 subasta.setTotalTransporte(rs.getInt("TOTALTRANSPORTE"));
                 subasta.setFechaSubasta(rs.getString("FECHASUBASTA"));
