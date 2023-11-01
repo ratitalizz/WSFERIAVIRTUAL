@@ -702,7 +702,7 @@ public class WebServiceFV {
         } 
      
     //DETALLE DEL PEDIDO
-    @WebMethod(operationName = "crearNuevoDetallePedidoo")
+    @WebMethod(operationName = "crearNuevoDetallePedido")
      public Boolean crearNuevoDetallePedido(
         @WebParam(name = "cantidad") int Cantidad,
         @WebParam(name = "idproducto") String Idproducto,
